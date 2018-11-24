@@ -1,6 +1,14 @@
-// Collection of the functions behind each tool
+$( "#calculate-tax" ).click(function() {
+    if($( "#income" ).val() == ""){
+        alert("Please enter an income!");
+    } else{
+        var result = incomeTax(parseInt($( "#income" ).val()), $( "#province" ).val());
+        $( "#income-after-tax" ).text("Your income after taxes is $" +
+        result[0].toFixed(2).toString() + ". The tax you pay is $" + result[1].toFixed(2).toString() + ", which is " +
+        (result[1]/result[0] * 100).toFixed(2).toString() + "% of your earnings.");
+    }
+})
 
-// Dict of provinces/territories and their tax rates for each bracket
 var rates = {"Newfoundland" : [[0.087, 36926], [0.145, 36926], [0.158, 57998], [0.173, 52740], [0.183, 184590]], 
             "Prince Edward Island" : [[0.098, 31984], [0.138, 31985], [0.167, 63969]],
             "Nova Scotia" : [[0.0879, 29590], [0.1495, 29590], [0.1667, 33820], [0.175, 57000], [0.21, 150000]],
@@ -14,18 +22,17 @@ var rates = {"Newfoundland" : [[0.087, 36926], [0.145, 36926], [0.158, 57998], [
             "Northwest Territories" : [[0.059, 42209], [0.086, 42211], [0.122, 52828], [0.1405, 137248]],
             "Nunavut"     :  [[0.04, 44437], [0.07, 44437], [0.09, 55614], [0.115, 144488]] };
 
-// Income Tax
-// Purpose
-// incomeTax(income, province) consumes income and province to produce the income after income tax
-
-// Contract
-// incomeTax: Num Str -> Num
-
 function incomeTax(income, province){
+    var tax;
     if(province == "Quebec"){
-        return income - fedTax(income) - queTax(income);
-    }else
-        return income - fedTax(income) - provincialTax(income, rates[province]);
+        tax = fedTax(income) + queTax(income)
+        return [income - tax, tax];
+    }else{
+        tax = fedTax(income) + provincialTax(income, rates[province]);
+        return [income - tax, tax];
+    }
+
+        
 }
 
 function fedTax(income){
@@ -71,38 +78,10 @@ function queTax(income){
         q_tax = income  * 0.20;
     }
     else if (income <= 104765) { 
-        q_tax = income  * 0.24
+        q_tax = income  * 0.24;
     }
     else{ 
         q_tax = income  * 0.2575;
     }
     return q_tax;
-}
-
-
-
-function ROI(g_invest,c_invest){
-    roi = (g_invest - c_invest) / c_invest
-    return roi
-}
-
-
-
-// Compound Calc
-// Purpose
-// compound(principal, contribution, interestRate, compoundRate, time) consumes principal, contribution, interestRate, compoundRate, time
-// to produce the new amount after being compounded at interestRate at compoundRate for time
-
-// Contract
-// compound: Num Num Num Num -> Num
-// requires: interestRate is expected to be passed in as a percentage (NOT a decimal)
-//           compoundRate is compounds per year (if compounded annually, then 1; monthly is 12)
-
-function compound(principal, contribution, interestRate, compoundRate, time){
-    var total = 0;
-    for(var i = 0; i < time; i++) {
-        total += contribution * Math.pow((1 + (interestRate / 100) / compoundRate), i * compoundRate);
-    }
-    total += principal * Math.pow(1 + (interestRate / 100) / compoundRate, compoundRate * time);
-    return total;
 }
