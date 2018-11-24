@@ -26,7 +26,7 @@ function fedTax(income){
         
     }
 
-    return (income - f_tax)
+    return Math.round((income - f_tax) * 100) / 100
 }
 
 
