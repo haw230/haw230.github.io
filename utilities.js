@@ -35,7 +35,7 @@ function fedTax(income){
 
     return income - f_tax;
 }
-var rates = {"Newfoundland" : [[0.087, 35851], [0.145, 35850], [0.158, 56309], [0.173, 51204], [0.183, 179214]],};
+var rates = {"Newfoundland" : [[0.087, 35851], [0.145, 35850], [0.158, 56309], [0.173, 51204], [0.183, 179214]]};
 
 function provincialTax(income, provincialTax){
     var remaining = income;
@@ -67,8 +67,13 @@ function ROI(g_invest,c_invest){
 // Contract
 // compound: Num Num Num Num -> Num
 // requires: interestRate is expected to be passed in as a percentage (NOT a decimal)
-//           compoundRate is 1 if compounded annually, 12 if monthly
+//           compoundRate is compounds per year (if compounded annually, then 1; monthly is 12)
 
-function compound(principal, interestRate, compoundRate, time){
-    principal * Math.pow(1 + (interestRate / 100) / compoundRate, compoundRate * time / 12);
+function compound(principal, contribution, interestRate, compoundRate, time){
+    var total = 0;
+    for(var i = 0; i < time; i++) {
+        total += contribution * Math.pow((1 + (interestRate / 100) / compoundRate), i * compoundRate);
+    }
+    total += principal * Math.pow(1 + (interestRate / 100) / compoundRate, compoundRate * time);
+    return total;
 }
