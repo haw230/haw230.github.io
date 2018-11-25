@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Blank Page</title>
+    <title>Compound Visualization</title>
 
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -29,7 +29,7 @@
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-      <a class="navbar-brand mr-1" href="index.html">Start Bootstrap</a>
+      <a class="navbar-brand mr-1" href="index.html"> Compound Visualization </a>
 
       <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
@@ -75,7 +75,7 @@
             <div class="dropdown-divider"></div>
             <h6 class="dropdown-header">Other Pages:</h6>
             <a class="dropdown-item" href="404.html">404 Page</a>
-            <a class="dropdown-item active" href="blank.html">Blank Page</a>
+            <a class="dropdown-item active" href="blank.html">Compound</a>
           </div>
         </li>
         <li class="nav-item">
@@ -105,18 +105,49 @@
           <!-- Page Content -->
           <h1>Compound Interest Calculator</h1>
           <hr>
-          Initial Investment: <input id="principal" type="text"><br>
-          Annual Contribution: <input id="contribution" type="text"><br>
-          Interest Rate (%): <input id="interest" type="text"><br>
-          Compound Rate: <select id="compound">
-            <option value="12">Monthly</option>
-            <option value="1">Annually</option>
-            <option value="2">Semi-Annually</option>
-            <option value="4">Quarterly</option>
-          </select><br>
-          Years of Growth: <span id="time-display"></span> 
-          <input type="range" min="5" max="100" value="50" class="slider" id="time"><br>
-          <button id="calculate-compound" type="button" class="btn btn-success">Calculate</button>
+          <table>
+            <tr>
+                <td>Initial Investment ($):</td>
+                <td><input id="principal" type="text" class="btn btn-secondary"></td>
+                <td rowspan=8></td>
+            </tr>
+            <tr>
+              <td>Annual Contribution: </td>
+              <td><input id="contribution" type="text" class="btn btn-secondary"></td>
+              <td rowspan=8></td>
+           </tr>
+           <tr>
+              <td> Interest Rate (%):</td>
+              <td><input id="interest" type="text" name="income" class="btn btn-secondary"></td>
+              <td rowspan=8></canvas></td>
+            </tr>
+            <tr>
+                <td>Compound Rate:</td>
+                <td>
+                  <select id="compound" class="btn btn-secondary">
+                    <option value="12">Monthly</option>
+                      <option value="1">Annually</option>
+                      <option value="2">Semi-Annually</option>
+                      <option value="4">Quarterly</option>
+                  </select>
+                
+                </td>
+            </tr>
+              <tr>
+                <td> Years of Growth: <span id="time-display"></span> </td>
+                <td><input type="range" min="5" max="100" value="50" class="slider" id="time" class="btn btn-secondary"></td>
+                <td rowspan=8></td>
+              </tr>
+            <tr>
+                <tr>
+                    <th></th>
+                    <td><button id="calculate-compound" type="button" class="btn btn-primary">Calculate</button></td>
+                </tr>
+                <tr>
+                  <br>
+                </tr>
+               
+        </table>
           <p id="compounded"></p>
           <br>
           <p>Compounding interest is very powerful. At an interest rate of 2%, every dollar saved today will be equal to $2.70 in 50 years.</p>
@@ -129,7 +160,7 @@
         <footer class="sticky-footer">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
-              <span>Copyright © Your Website 2018</span>
+              <span></span>
             </div>
           </div>
         </footer>
