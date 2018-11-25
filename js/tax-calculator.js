@@ -4,7 +4,7 @@ $( "#calculate-tax" ).click(function() {
     } else{
         var result = incomeTax(parseInt($( "#income" ).val()), $( "#province" ).val());
         $( "#income-after-tax" ).html("Income after Taxes: $" +
-        result[0].toFixed(2).toString() +". <br> Tax Paid: $" + result[1].toFixed(2).toString() + "<br>Amount of earnings taxed:" +
+        result[0].toFixed(2).toString() +". <br> Tax Paid: $" + result[1].toFixed(2).toString() + "<br>Amount of earnings taxed: " +
         (result[1]/result[0] * 100).toFixed(2).toString()+'%');
         
     }
