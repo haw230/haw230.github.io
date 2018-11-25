@@ -18,8 +18,8 @@ $( "#calculate-compound" ).click(function() {
     var time = parseInt($( "#time" ).val());
     var result = compoundExtended(principal, contribution, interest, compoundRate, time);
 
-    $( "#compounded" ).text("You will have saved up $" +
-    result[0].toFixed(2).toString() + ". $" + result[1].toFixed(2).toString() + " will be generated from interest alone.");
+    $( "#compounded" ).html("You will have saved up $" +
+    result[0].toFixed(2).toString() + ", this will be generated from interest alone.");
     updateScales(compoundChart);
     var savings = [principal];
     var savingsFromInterest = [0];
