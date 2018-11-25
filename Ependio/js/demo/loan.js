@@ -115,12 +115,16 @@ function calculate() {
   var monthly = (principal * x * interest) / (x - 1);
   temp = []
   updateScales(loanChart)
+  num = []
+  dates = []
   
-  if(amount.value != lamount || apr.value!=lapr || years.value!=lyears){
+  //if(amount.value != lamount || apr.value!=lapr || years.value!=lyears){
     for(i = 0; i<payments+1; i++){
-    addData(loanChart, i,(monthly*i).toFixed(2));
+   // addData(loanChart, i,(monthly*i).toFixed(2));
+    num[i] = ((monthly*i).toFixed(2));
+    dates[i] = i;
     }
-  }
+ // }
   
  
 
@@ -131,8 +135,9 @@ function calculate() {
   lamount = amount.value;
   lapr = apr.value;
   lyears = years.value;
-  console.log(amount.value)
-
+ // console.log(num);
+  loanChart.data.labels = dates;
+  loanChart.data.datasets[0].data = num;
   loanChart.data.datasets[1].data =temp;
   loanChart.update();
  
@@ -262,27 +267,3 @@ function getLenders(amount, apr, years, zipcode) {
           }
 
 
-///
-function addDataSet(chart) {
-
- 
-   add = {
-      label: "Payment for month",
-      lineTension: 0.3,
-      backgroundColor: "rgba(2,117,216,0.2)",
-      borderColor: "rgba(2,117,216,1)",
-      pointRadius: 5,
-      pointBackgroundColor: "rgba(2,117,216,1)",
-      pointBorderColor: "rgba(255,255,255,0.8)",
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "rgba(2,117,216,1)",
-      pointHitRadius: 50,
-      pointBorderWidth: 2,
-      data: [50,50,50,50,50],
-    }
-
-    console.log("added");
-
-  config.data.datasets.push(add);
-  window.chart.update();
-}
